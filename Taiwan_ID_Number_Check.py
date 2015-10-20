@@ -5,6 +5,7 @@ def Taiwan_ID_Number_Check(ID):
 
     if len(ID) != 10:               #字數檢查 length check
         return False
+    
     if not ID[1:9].isnumeric():   #2～10碼檢查 [1:9] not str check 
         return False
 
@@ -12,17 +13,16 @@ def Taiwan_ID_Number_Check(ID):
         return False
     ID = ID.lower()
     ID = list(ID)
-    if ID[1] != 1 or 2:         #2碼檢查 [1] check
+    
+    if int(ID[1])!=1 and int(ID[1])!=2:         #2碼檢查 [1] check
         return False
+    
     if len(ID) == 10:             #驗證 (N0 十位數 + (N0 個位數 x 9) + (N1 x 8) + (N2 x 7) +  (N3 x 6) +  (N4 x 5) +  (N5 x 4) +  (N6 x 3) +  (N7 x 2) + N8 + N9)
-
         ID[0] = first[ID[0]]
         ID00 = ID[0]
         del ID[0]
-
         ID.insert(0,int(ID00 % 10))
         ID.insert(0,int(ID00 / 10))
-
         total = 0
         
         for x,y in zip(ID,sec):
